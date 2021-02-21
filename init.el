@@ -37,9 +37,12 @@
 (add-hook 'after-init-hook 'global-company-mode)
 (setq company-clang-executable "/usr/bin/clang-9")
 (setq company-backends (delete 'company-semantic company-backends))
+(setq company-minimum-prefix-length 2)
 
-(define-key c-mode-base-map  [(tab)] 'company-complete)
-(define-key c++-mode-map  [(tab)] 'company-complete)
+;(define-key c-mode-base-map  [(tab "SPC")] 'company-complete)
+;(define-key c++-mode-map  [(tab "SPC")] 'company-complete)
+;(global-set-key (kbd "<tab>") #'proced)
+(global-set-key (kbd "TAB") #'indent-for-tab-command)
 
 
 (add-to-list 'load-path "~/.emacs.d/ianertson-emacs/all-the-icons.el/")
@@ -115,3 +118,12 @@
 (add-to-list 'load-path "~/.emacs.d/ianertson-emacs/themes/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/ianertson-emacs/themes/")
 (load-theme 'gruvbox t)
+
+
+; etc
+
+(setq-default c-basic-offset 2)
+(setq c-default-style "linux"
+      c-basic-offset 2)
+
+(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
