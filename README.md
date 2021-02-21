@@ -2,7 +2,9 @@
 > My emacs configuration
 
 ## Using it
-> git clone <url> --recurse-submodules ~/.emacs.d/.
+```bash
+git clone <url> --recurse-submodules ~/.emacs.d/.
+```
 
 ## Then add to the existing emacs config:
 ```lisp
