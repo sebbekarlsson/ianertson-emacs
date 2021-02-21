@@ -1,0 +1,9 @@
+[submodule "company-mode"]
+	path = company-mode
+	url = https://github.com/company-mode/company-mode.git
+[submodule "emacs-neotree"]
+	path = emacs-neotree
+	url = https://github.com/jaypei/emacs-neotree.git
+[submodule "all-the-icons.el"]
+	path = all-the-icons.el
+	url = https://github.com/domtronn/all-the-icons.el.git
