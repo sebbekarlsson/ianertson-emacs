@@ -7,3 +7,18 @@
 [submodule "all-the-icons.el"]
 	path = all-the-icons.el
 	url = https://github.com/domtronn/all-the-icons.el.git
+[submodule "markdown-mode"]
+	path = markdown-mode
+	url = https://github.com/jrblevin/markdown-mode.git
+[submodule "js2-mode"]
+	path = js2-mode
+	url = https://github.com/mooz/js2-mode.git
+[submodule "typescript.el"]
+	path = typescript.el
+	url = https://github.com/emacs-typescript/typescript.el.git
+[submodule "rjsx-mode"]
+	path = rjsx-mode
+	url = https://github.com/felipeochoa/rjsx-mode.git
+[submodule "web-mode"]
+	path = web-mode
+	url = https://github.com/fxbois/web-mode.git

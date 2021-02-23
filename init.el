@@ -37,8 +37,7 @@
 (add-hook 'after-init-hook 'global-company-mode)
 (setq company-clang-executable "/usr/bin/clang-9")
 (setq company-backends (delete 'company-semantic company-backends))
-(setq company-minimum-prefix-length 2)
-
+(electric-pair-mode t)
 ;(define-key c-mode-base-map  [(tab "SPC")] 'company-complete)
 ;(define-key c++-mode-map  [(tab "SPC")] 'company-complete)
 ;(global-set-key (kbd "<tab>") #'proced)
@@ -55,8 +54,26 @@
 (global-set-key "\M-t" 'neotree-toggle)
 (setq neo-smart-open t)
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
+
+; function to just change directory without opening it
+(defun neo-set-dir (full-path &optional arg)
+    (if neo-click-changes-root
+(neotree-change-root)
+(progn
+(let ((new-state (neo-buffer--refresh full-path)))
+(neo-buffer--refresh t)
+(when neo-auto-indent-point
+            (when new-state (forward-line 1))
+                      (neo-point-auto-indent))))))
+
+; event to change directory without opening it
+(defun neotree-changedir (&optional arg)
+    (interactive "P")
+      (neo-buffer--execute arg 'neo-open-file 'neo-set-dir))
+
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-changedir)
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
 (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
@@ -77,7 +94,7 @@
 (setq path-to-ctags "/usr/bin/ctags")
 (defun create-tags (dir-name)
   (when (and (stringp buffer-file-name)
-             (string-match "\\.c\\'" buffer-file-name))
+             (string-match "\\.c\\|\\.js\\|\\.jsx\\|\\.ts\\|\\.tsx\\|\\.py\\'" buffer-file-name))
     "Create tags file."
     (interactive "DDirectory: ")
     (  shell-command
@@ -119,6 +136,35 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/ianertson-emacs/themes/")
 (load-theme 'gruvbox t)
 
+; lsp
+(ensure-package 'lsp-mode)
+  (lsp)
+
+(ensure-package 'lsp-treemacs)
+(setq lsp-enable-indentation t)
+
+; markdown
+(add-to-list 'load-path "~/.emacs.d/ianertson-emacs/markdown-mode")
+(use-package 'markdown-mode)
+
+; web
+(add-to-list 'load-path "~/.emacs.d/ianertson-emacs/web-mode")
+(use-package 'web-mode)
+
+; JS
+(add-to-list 'load-path "~/.emacs.d/ianertson-emacs/js2-mode")
+(use-package 'js2-mode)
+
+; JSX
+(add-to-list 'load-path "~/.emacs.d/ianertson-emacs/rjsx-mode")
+(use-package 'rjsx-mode)
+;(add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
+
+; TS
+(add-to-list 'load-path "~/.emacs.d/ianertson-emacs/typescript.el")
+(load-file "~/.emacs.d/ianertson-emacs/typescript.el/typescript-mode.el")
+(use-package 'typescript-mode)
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
 
 ; etc
 
