@@ -120,6 +120,7 @@
 
 (load-file "~/.emacs.d/ianertson-emacs/dash.el")
 (load-file "~/.emacs.d/ianertson-emacs/autothemer.el")
+(load-file "~/.emacs.d/ianertson-emacs/snippets.el")
 
 ; hide scrollbars
 (add-to-list 'default-frame-alist
@@ -173,3 +174,17 @@
       c-basic-offset 2)
 
 (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
+
+(when (version<= "26.0.50" emacs-version )
+    (global-display-line-numbers-mode))
+
+
+;(ensure-package 'lsp-mode)
+;  (lsp)
+
+(ensure-package 'undo-tree)
+(use-package 'undo-tree)
+(global-undo-tree-mode)
+(evil-set-undo-system 'undo-tree)
+;(define-key evil-normal-state-map (kbd "C-r") 'undo-tree-redo)
+;(define-key evil-normal-state-map (kbd "u") 'undo-tree-undo)
